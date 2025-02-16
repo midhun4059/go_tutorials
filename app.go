@@ -44,7 +44,7 @@ for result.Next(){
 	var name string
 	var age  int
 
-	result.Scan(&id,&name,&age)
+	err= result.Scan(&id,&name,&age)
 
 	if err !=nil{
 		panic(err)
