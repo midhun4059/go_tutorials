@@ -3,8 +3,17 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
+	"net/http"
+_ "github.com/go-sql-driver/mysql"
 )
+
+
+func display(w http.ResponseWriter,r * http.Request){
+
+	
+	fmt.Fprint(w," data is sucessfully displayed on terminal")
+}
+
 
 func main() {
 	
@@ -41,13 +50,14 @@ for result.Next(){
 		panic(err)
 	}
 
-
-	
-
-	fmt.Printf("id: %d ,name: %s,age: %d \n",id,name,age )
+fmt.Printf("id: %d ,name: %s,age: %d \n",id,name,age )
 	
 	
 }
-fmt.Print(" data is sucessfully displayed on terminal")
+
+http.HandleFunc("/",display)
+fmt.Print("Server is running on 3000")
+http.ListenAndServe(":3000",nil)
+
 
 }
